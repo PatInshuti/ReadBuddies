@@ -115,7 +115,7 @@ app.delete("/blogs/:id", function(req, res){
   })
 })*/
 
-var port=4000;
+var port=7000;
 app.listen(port, function(){
   console.log("server running at"+ port);
 });
