@@ -34,7 +34,7 @@
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/">
         <strong>StudyBuddies</strong>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="/">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -57,12 +57,12 @@
         <form class="form-inline">
           <div class="md-form mt-0">
 
-              <a class="btn btn-warning btn-sm my-0s become-tutor-button">Become Peer Tutor</a>
+              <a class="btn btn-warning btn-sm my-0s become-tutor-button" href="/registerTutor">Become Peer Tutor</a>
 
-             <span class="vl"></span> 
+             <span class="vl"></span>
 
-            <a class="btn btn-white btn-sm my-0s loginbutton">Login</a>
-            <a class="btn btn-white btn-sm my-0">sign up</a>
+            <a class="btn btn-white btn-sm my-0s loginbutton" href="/login">Login</a>
+            <a class="btn btn-white btn-sm my-0" href="/register">sign up</a>
           </div>
         </form>
       </div>
@@ -81,12 +81,38 @@
       <!-- Content -->
       <div class="middle-search">
         <p class="search-text" >What Do you want to study Today?</p>
-      <form class="form-inline my-1">
+
+        <form>
+    <!-- Grid row -->
+    <div class="search-form">
+    <div class="form-row">
+        <!-- Grid column -->
+        <div class="col-10">
+            <!-- Default input -->
+            <input type="text" class="form-control" placeholder="Search For a Study Mate">
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col">
+            <!-- Default input -->
+            <button type="button" class="btn btn-amber waves-effect main-search-button">Let's Study</button>
+        </div>
+        <!-- Grid column -->
+    </div>
+  </div>
+    <!-- Grid row -->
+</form>
+<!-- Default column sizing form -->
+
+
+    <!--  <form class="form-inline my-1">
         <div class="md-form form-sm mt-0">
             <input class="form-control form-control-lg search-text-two" type="text" placeholder="Search For Study Mate" aria-label="Search">
         </div>
         <button type="button" class="btn btn-amber waves-effect">Let's Study</button>
     </form>
+  -->
   </div>
     </div>
     <!-- Mask & flexbox options-->

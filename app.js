@@ -1,120 +1,117 @@
-var express = require("express");
-var app =  express();
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var methodOverride=require("method-override");
-var expressSanitizer=require("express-sanitizer");
-//mongoose.connect("mongodb://localhost:/Restful_Blog_app");
-app.set("view engine", "ejs");
+var express               = require("express"),
+    app                   = express(),
+    mongoose              = require("mongoose"),
+    passport              = require("passport"),
+    bodyParser            = require("body-parser"),
+    User                  = require("./models/user"),
+    LocalStrategy         = require("passport-local"),
+    passportLocalMongoose = require("passport-local-mongoose")
+
+mongoose.connect("mongodb://localhost/sb8");
+
+app.set('view engine', 'ejs');
 app.use(express.static("public"));
-app.use (bodyParser.urlencoded({extended:true}));
-app.use(expressSanitizer());
-app.use(methodOverride("_method"));
-/*var blogSchema = new mongoose.Schema({
-  title:String,
-  image:String,
-  body:String,
-  created:{type: Date, default: Date.now}
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(require("express-session")({
+    secret: "Rusty is the best and cutest dog in the world",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   next();
 });
+//============
+// ROUTES
+//============
 
-var Blog = mongoose.model("Blog",blogSchema);*/
-
-//Blog.create({
-//  title:" Adelle ",
-//  image:"http://www.radio92fm.com.br/wp-content/uploads/2017/05/Adelle.jpg",
-//  body: "This is a very good picture"
-//})
-
-//Restful routes
-//INDEX
 app.get("/", function(req, res){
-  res.render("index");
-});
-/*app.get("/blogs", function(req,res){
-  Blog.find({}, function(err,blogs){
-    if (err){
-      console.log("Somethig was wrong");
-    }
-    else{
-      res.render("index", {blogs:blogs});
-    }
-  })
-
-});
-//New
-app.get("/blogs/new", function(req, res){
-  res.render("new");
+    res.render("index");
 });
 
-
-//Create route , after it directs to another page
-req.body.blog.body = req.sanitize(req.body.blog.body);
-app.post("/blogs", function(req,res){
-  //create blogs
-  Blog.create(req.body.blog, function(err, NewBlog){
-    if(err){
-      console.log("Opps Eroor ocured");
-    }
-
-    else{
-      res.redirect("/");
-      console.log(req.body.blog);
-    }
-
-  });
+app.get("/secret",isLoggedIn, function(req, res){
+   res.render("secret");
 });
 
-//show routes
-app.get("/blogs/:id", function(req, res){
-  Blog.findById(req.params.id, function(err, FoundBlog){
-    if (err){
-      console.log("Error Occured");
-    }
-    else{
-      res.render("show", {FoundBlog:FoundBlog});
-    }
-  });
+app.get("/fail", function(req, res){
+  res.render("fail");
+})
+
+
+
+//  ===========
+// AUTH ROUTES
+//  ===========
+
+// show register form
+app.get("/register", function(req, res){
+   res.render("register");
 });
-// Edit routes
-
-app.get("/blogs/:id/edit", function(req, res){
-  Blog.findById(req.params.id,function(err,FoundBlog){
-      if (err){
-        console.log("Error occured in looking for the Blog to Edit");
-      }
-
-    else{
-        res.render("edit",{FoundBlog:FoundBlog});
-    }
-  })
-
-});
-
-// Update route
-req.body.blog.body = req.sanitize(req.body.blog.body);
-app.put("/blogs/:id",function(req, res){
-  Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, UpdatedBlog){
-    if(err){
-      console.log("Something went wrong");
-    }
-    else{
-      res.redirect("/blogs/"+req.params.id);
-    }
-  })
+//handle sign up logic
+app.post("/register", function(req, res){
+    var newUser = new User({email:req.body.email, username: req.body.username,tutor:false});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+           res.send("Sucesss Registration");
+           console.log("Username"+username);
+           console.log("Email"+email);
+        });
+    });
 });
 
-//Delete Routes
-app.delete("/blogs/:id", function(req, res){
-  Blog.findByIdAndRemove(req.params.id, function(err, deletedBlog){
-    if (err){
-      console.log("Delete Failed");
-    }
-    else{
-      res.redirect("/");
-    }
-  })
-})*/
+app.get("/registerTutor", function(req, res){
+   res.render("registerTutor");
+});
+app.post("/registerTutor", function(req, res){
+  var newUser = new User({email:req.body.email, username: req.body.username,tutor:true});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+           res.send("Tutor Registration Sucesss");
+        });
+    });
+});
 
+
+
+// show login form
+app.get("/login", function(req, res){
+   res.render("login");
+});
+// handling login logic
+app.post("/login", passport.authenticate("local",
+    {
+        successRedirect: "/secret",
+        failureRedirect: "/fail"
+    }), function(req, res){
+});
+
+// logic route
+app.get("/logout", function(req, res){
+   req.logout();
+   res.redirect("/");
+});
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 var port=3000;
 app.listen(port, function(req, res){
   console.log("server running at"+ port);
