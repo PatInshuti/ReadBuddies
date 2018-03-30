@@ -1,20 +1,27 @@
 <% include ./partials/loginheader %>
   <!-- Card -->
-<div class="card registerpageform">
+<div class="card registerpageform col-sm-12 col-xs-12">
 
     <div class="card-body">
 
 <form action="/register" method="post">
   <p class="h4 text-center mb-4" style="color:orange;">Register</p>
-    <label for="username" class="grey-text">Your Email</label>
-    <input type="email" id="username" class="form-control" name="username" placeholder="Email">
 
+    <div class="form-group">
+    <label for="username" class="grey-text col-sm-12 col-xs-12">Your Email</label>
+    <input type="email" id="username" class="form-control col-sm-12 col-xs-12" name="username" placeholder="Email">
+  </div>
+
+    <div class="form-group">
     <label for="email" class="grey-text">Choose Username</label>
-    <input type="text" id="email" class="form-control" name="email" placeholder="username">
+    <input type="text" id="email" class="form-control col-sm-12 col-xs-12" name="email" placeholder="username">
+  </div>
 
+    <div class="form-group">
     <label for="password" class="grey-text">Password</label>
-    <input type="password" id="password" class="form-control" name="password" placeholder="password">
-
+    <input type="password" id="password" class="form-control col-sm-12 col-xs-12" name="password" placeholder="password">
+  </div>
+  
     <div class="text-center mt-4">
     <input type="submit" class="btn btn-outline-orange" value="SignUp">
   </div>
