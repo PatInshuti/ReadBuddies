@@ -135,5 +135,42 @@ hr.style14 {
 .completeStudentRegistration-content{
   margin:0 auto;
   padding: 80px;
-  margin-top: -38%;
+  margin-top: -45%;
+}
+
+
+h2{
+
+    color:#2c3e50;
+}
+#date{
+
+    color:#3498db;
+    text-transform: uppercase;
+    font-weight:bold;
+    letter-spacing: 5px;
+}
+
+#visible_border{
+
+    border-left:6px solid #bdc3c7;
+    padding:5px;
+}
+
+
+
+/* Gradient transparent - color - transparent */
+
+hr{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+.blog{
+max-width: 100%;
+width:100%;
+font-family: Source Sans Pro;
+margin: 0 auto;
+padding:20px;
+border:20px solid #bdc3c7;
 }
