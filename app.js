@@ -63,9 +63,7 @@ app.post("/register", function(req, res){
             return res.render("register");
         }
         passport.authenticate("local")(req, res, function(){
-           res.send("Sucesss Registration");
-           console.log("Username"+username);
-           console.log("Email"+email);
+          res.render("completeStudentRegistration");
         });
     });
 });
