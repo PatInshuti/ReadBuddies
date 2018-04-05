@@ -3,6 +3,7 @@ var express               = require("express"),
     mongoose              = require("mongoose"),
     passport              = require("passport"),
     bodyParser            = require("body-parser"),
+    Category              = require("./models/category"),
     User                  = require("./models/user"),
     LocalStrategy         = require("passport-local"),
     passportLocalMongoose = require("passport-local-mongoose")
@@ -31,10 +32,38 @@ app.use(function(req, res, next){
 //============
 // ROUTES
 //============
-
 app.get("/", function(req, res){
-    res.render("index");
+  res.redirect("/categories")
+})
+app.get("/categories", function(req, res){
+  Category.find({},function(err,FoundCategory){
+    if(err){
+      console.log("Error happening in finding The Category");
+    }
+
+    res.render("index", {Category:FoundCategory});
+
+  });
 });
+
+app.get("/categories/:id", function(req, res){
+  Category.findById(req.params.id, function(err, FoundCategory){
+    if (err){
+      console.log("Error Occured");
+    }
+      User.find({tutor: true},function(err, FoundTutor){
+        if(err){
+          console.log("Error Found in Finding Tutor in a specific category");
+        }
+        else{
+          res.render("categoryTutors", {FoundTutor:FoundTutor});
+        }
+      })
+  });
+});
+
+
+
 
 app.get("/secret",isLoggedIn, function(req, res){
    res.render("secret");
@@ -72,11 +101,23 @@ app.get("/registerTutor", function(req, res){
    res.render("registerTutor");
 });
 app.post("/registerTutor", function(req, res){
-  var newUser = new User({email:req.body.email, username: req.body.username,tutor:true});
+  var newUser = new User({email:req.body.email, username: req.body.username, tutor:true});
+      Category.create({
+        name:"Computer",
+        content:"Amazing!"
+      }, function(err, Category){
+        if(err){
+          console.log("Can't Create Category");
+        }
+
+        newUser.category.push(Category);
+        newUser.save();
+
+      });
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            console.log(err);
-            return res.render("register");
+            console.log("Error in creating tutor");
+            return res.render("/");
         }
         passport.authenticate("local")(req, res, function(){
            res.send("Tutor Registration Sucesss");
@@ -110,6 +151,14 @@ function isLoggedIn(req, res, next){
     }
     res.redirect("/login");
 }
+
+//Category.create({
+
+//  name:"Math",
+//  content:"key to understanding sciences"
+//});
+
+
 var port=3000;
 app.listen(port, function(req, res){
   console.log("server running at"+ port);

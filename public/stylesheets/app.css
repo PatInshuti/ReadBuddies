@@ -5,7 +5,7 @@ html,
 body,
 header,
 .view {
-  height: 95%;
+  height: 90%;
 }
 
 @media (max-width: 740px) {
@@ -49,7 +49,7 @@ h6 {
 }
 
 .main-start{
-  width: 80%;
+  width: 90%;
   margin:0 auto;
   margin-top: -20%;
   margin-bottom: 10%;
@@ -173,4 +173,20 @@ font-family: Source Sans Pro;
 margin: 0 auto;
 padding:20px;
 border:20px solid #bdc3c7;
+}
+
+.search-form{
+  margin-top: 30%;
+}
+
+.row.index{
+  width: 100%;
+  margin-top: 8%;
+}
+
+.card.index{
+  width: 24%;
+  padding:1%;
+  margin-left:1%;
+  margin-bottom:1%;
 }
