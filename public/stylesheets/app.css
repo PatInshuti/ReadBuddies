@@ -5,7 +5,7 @@ html,
 body,
 header,
 .view {
-  height: 97%;
+  height: 90%;
 }
 
 @media (max-width: 740px) {
@@ -19,7 +19,7 @@ header,
 }
 
 .top-nav-collapse {
-  background-color: #424f95 !important;
+  background-color: #416ea8 !important;
 }
 
 .navbar:not(.top-nav-collapse) {
@@ -49,7 +49,7 @@ h6 {
 }
 
 .main-start{
-  width: 80%;
+  width: 90%;
   margin:0 auto;
   margin-top: -20%;
   margin-bottom: 10%;
@@ -59,4 +59,134 @@ h6 {
 
   margin-right: 40%;
   margin-left:-50%;
+}
+
+
+hr.style14 {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+
+
+.loginbutton{
+  margin-left: 20px;
+}
+
+.become-tutor-button{
+  margin-right: 70px;
+}
+
+.search-text-two{
+  color:whitesmoke;
+}
+
+.search-text{
+  color: white;
+}
+.main-search-button{
+  margin-bottom: 30%;
+  margin-left: 32%;
+}
+.search-form{
+  margin: 0 auto%;
+  margin-left: 70%;
+
+  width: 55%;
+
+}
+
+.loginpageform{
+  width: 40%;
+  margin:0 auto;
+  padding: 80px;
+  margin-top: -38%;
+
+}
+.registerpageform{
+  width: 40%;
+  margin:0 auto;
+  padding: 80px;
+  margin-top: -38%;
+}
+#fontdemo1{
+  font-family: 'Megrim', cursive;
+  color: orange;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+#fontdemo2{
+  font-family: 'Megrim', cursive;
+  color: black;
+  font-size: 30px;
+  font-weight: 600;
+}
+.completeStudentRegistration-tab{
+  width:70%;
+  margin: 0 auto;
+  margin-left: 10%;
+  margin-top: -15%;
+  padding-bottom: 30%;
+}
+.completeStudentRegistration-content{
+  margin:0 auto;
+  padding: 80px;
+  margin-top: -45%;
+}
+
+
+h2{
+
+    color:#2c3e50;
+}
+#date{
+
+    color:#3498db;
+    text-transform: uppercase;
+    font-weight:bold;
+    letter-spacing: 5px;
+}
+
+#visible_border{
+
+    border-left:6px solid #bdc3c7;
+    padding:5px;
+}
+
+
+
+/* Gradient transparent - color - transparent */
+
+hr{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+.blog{
+max-width: 100%;
+width:100%;
+font-family: Source Sans Pro;
+margin: 0 auto;
+padding:20px;
+border:20px solid #bdc3c7;
+}
+
+.search-form{
+  margin-top: 30%;
+}
+
+.row.index{
+  width: 100%;
+  margin-top: 8%;
+}
+
+.card.index{
+  width: 24%;
+  padding:1%;
+  margin-left:1%;
+  margin-bottom:1%;
 }
