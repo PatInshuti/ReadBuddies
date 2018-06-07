@@ -103,8 +103,8 @@ app.get("/registerTutor", function(req, res){
 app.post("/registerTutor", function(req, res){
   var newUser = new User({email:req.body.email, username: req.body.username, tutor:true});
       Category.create({
-        name:"Computer",
-        content:"Amazing!"
+        name:"Bio",
+        content:" key to understanding sciences"
       }, function(err, Category){
         if(err){
           console.log("Can't Create Category");

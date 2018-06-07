@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
   tutor:Boolean,
   category:[
       {
-         type: mongoose.Schema.Types.ObjectId,
+         type: mongoose.Schema.Types.String,
          ref: "Category"
       }
    ]
