@@ -159,7 +159,7 @@ function isLoggedIn(req, res, next){
 //});
 
 
-var port=3000;
+var port=4000;
 app.listen(port, function(req, res){
   console.log("server running at"+ port);
 });
